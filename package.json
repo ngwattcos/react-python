@@ -13,21 +13,24 @@
     "url": "git+https://github.com/ngwattcos/react-python.git"
   },
   "author": "",
-  "contributors": [{
-    "name": "Scott Wang",
-    "email": "curiosity142000@gmail.com",
-    "url": "https://github.com/ngwattcos"
-  },
-  {
-    "name": "Connie Lei",
-    "url": "https://github.com/connielei"
-  }],
+  "contributors": [
+    {
+      "name": "Scott Wang",
+      "email": "curiosity142000@gmail.com",
+      "url": "https://github.com/ngwattcos"
+    },
+    {
+      "name": "Connie Lei",
+      "url": "https://github.com/connielei"
+    }
+  ],
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ngwattcos/react-python/issues"
   },
   "homepage": "https://github.com/ngwattcos/react-python#readme",
   "dependencies": {
+    "nodemon": "^2.0.5",
     "shelljs": "^0.8.4"
   }
 }
