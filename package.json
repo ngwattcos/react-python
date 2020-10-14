@@ -1,0 +1,20 @@
+{
+  "name": "react-python",
+  "version": "1.0.0",
+  "description": "A Python-like syntax that compiles down into JSX.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-container": "npm run-script --prefix scripts/create-app-container.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngwattcos/react-python.git"
+  },
+  "author": "Scott Wang and Connie Lei",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/ngwattcos/react-python/issues"
+  },
+  "homepage": "https://github.com/ngwattcos/react-python#readme"
+}
