@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-container": "npm run-script --prefix scripts/create-app-container.js"
+    "create-container": "node scripts/create-app-container.js"
   },
   "repository": {
     "type": "git",
