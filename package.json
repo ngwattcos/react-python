@@ -5,16 +5,29 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-container": "node scripts/create-app-container.js"
+    "create-container": "node scripts/create-app-container.js",
+    "create": "node create-app-container.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngwattcos/react-python.git"
   },
-  "author": "Scott Wang and Connie Lei",
-  "license": "SEE LICENSE IN LICENSE",
+  "author": "",
+  "contributors": [{
+    "name": "Scott Wang",
+    "email": "curiosity142000@gmail.com",
+    "url": "https://github.com/ngwattcos"
+  },
+  {
+    "name": "Connie Lei",
+    "url": "https://github.com/connielei"
+  }],
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ngwattcos/react-python/issues"
   },
-  "homepage": "https://github.com/ngwattcos/react-python#readme"
+  "homepage": "https://github.com/ngwattcos/react-python#readme",
+  "dependencies": {
+    "shelljs": "^0.8.4"
+  }
 }
