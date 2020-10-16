@@ -31,7 +31,11 @@
   },
   "homepage": "https://github.com/ngwattcos/react-python#readme",
   "dependencies": {
+<<<<<<< HEAD
     "gulp": "^4.0.2",
+=======
+    "nodemon": "^2.0.5",
+>>>>>>> 0eddf81e9090c657a9b0689ed2b0b8d329390ad7
     "shelljs": "^0.8.4"
   }
 }
