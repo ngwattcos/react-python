@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 # Masc stuff
 .DS_Store
 
->>>>>>> 0eddf81e9090c657a9b0689ed2b0b8d329390ad7
 # Logs
 logs
 *.log
@@ -12,12 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-<<<<<<< HEAD
-=======
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
->>>>>>> 0eddf81e9090c657a9b0689ed2b0b8d329390ad7
 # Runtime data
 pids
 *.pid
