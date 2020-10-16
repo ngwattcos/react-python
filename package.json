@@ -2,7 +2,7 @@
   "name": "react-python",
   "version": "1.0.0",
   "description": "A Python-like syntax that compiles down into JSX.",
-  "bin": "bin/index.js",
+  "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "create-container": "node scripts/create-app-container.js",
@@ -31,7 +31,16 @@
   },
   "homepage": "https://github.com/ngwattcos/react-python#readme",
   "dependencies": {
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^5.0.1",
+    "figlet": "^1.5.0",
     "gulp": "^4.0.2",
+    "inquirer": "^7.3.3",
     "shelljs": "^0.8.4"
+  },
+  "bin": {
+    "react-python-setup": "./bin/setup.js",
+    "react-python-watch": "./bin/index.js"
   }
 }

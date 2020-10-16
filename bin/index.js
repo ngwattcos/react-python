@@ -5,9 +5,9 @@ var { watch } = require("gulp");
 /**
  * 
  * 
- * Needs to me made configurable with an input directory and output directory.
+ * Needs to be made configurable with an input directory and output directory.
+ * Probably should be done through through user-provided config file (their project package.json?)
  * 
- * Needs to use nodemon to watch Python source files to call compile directly
  */
 
 
@@ -16,6 +16,7 @@ exports.print = function() {
   console.log("running lol");
 }
 
+exports.print();
 
 let inputDir = "";
 let outputDir = "";
