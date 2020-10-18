@@ -16,7 +16,8 @@ const runSetup = async () => {
   console.log(
     figlet.textSync('React-Python', {
       horizontalLayout: 'default'
-    }));
+    })
+  );
 
   const config = await prompts.initTranspiler();
 
@@ -24,10 +25,28 @@ const runSetup = async () => {
 }
 
 
-runSetup().then((config) => {
-  console.log(config);
-  fs.writeFile(fileName, JSON.stringify(config, null, 2), function writeJSON(err) {
-    if (err) {
-      return console.log(err)
-    };
-})});
+runSetup()
+.then(promptResult => {
+  const { OCamlInstalled, ...config } = promptResult;
+
+  if (!OCamlInstalled) {
+    throw 'Please install OCaml in the meantime.'
+  }
+
+  return config;
+})
+.then(config => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(fileName, JSON.stringify(config, null, 2), function writeJSON(err) {
+      if (err) {
+        reject(err);
+      };
+      resolve(`Wrote to configuration file: ${fileName}`);
+  })
+})})
+.then(successMsg => {
+  console.log(successMsg);
+})
+.catch(err => {
+  console.log(err);
+});
