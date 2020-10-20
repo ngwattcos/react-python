@@ -35,12 +35,14 @@
     "clui": "^0.3.6",
     "configstore": "^5.0.1",
     "figlet": "^1.5.0",
-    "gulp": "^4.0.2",
+    "filewatcher": "^3.0.1",
     "inquirer": "^7.3.3",
     "shelljs": "^0.8.4"
   },
   "bin": {
     "react-python-setup": "./bin/setup.js",
-    "react-python-watch": "./bin/index.js"
+    "react-python-watch-and-compile": "clean && ./bin/index.js",
+    "pyxc": "clean && ./bin/index.js",
+    "clean": "./bin/clean.js"
   }
 }
