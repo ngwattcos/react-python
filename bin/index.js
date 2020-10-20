@@ -14,26 +14,39 @@ const filewatcher = require('filewatcher');
 const watcher = filewatcher();
 
 // probably canges this to ./../react-python-config.json
-let rawConfig = fs.readFileSync('./react-python-config.json');
-let configData = JSON.parse(rawConfig);
-
-// should be read from json
-const input_dir = configData.inDir;
-const output_dir = configData.outDir;
-
-console.log(`input directory: ${input_dir}`);
-console.log(`output directory: ${output_dir}`);
-
-watcher.add(input_dir);
-
-
-
-watcher.on('change', function(file, stat) {
-  console.log(`File modified: ${file}`);
-  if (!stat) {
-    console.log('deleted');
+new Promise((resolve, reject) => {
+  let rawConfig = fs.readFileSync('./react-python-config.json');
+  let configData = JSON.parse(rawConfig);
+  resolve(configData);
+}).then(configData => {
+  // should be read from json
+  if (!verifyInputDir(configData.inDir)) {
+    throw new Error("invalid input dir, run react-python-setup again");
   }
+  if (!verifyOutputDir(configData.inDir)) {
+    throw new Error("invalid output dir, run react-python-setup again");
+  }
+  return configData;
+}).then(configData => {
+  console.log(`input directory: ${configData.inDir}`);
+  console.log(`output directory: ${configData.outDir}`);
+
+  watcher.add(configData.inDir);
+
+
+
+  watcher.on('change', function(file, stat) {
+    console.log(`File modified: ${file}`);
+    if (!stat) {
+      console.log('deleted');
+    }
+  });
+}).catch(err => {
+  console.log(err);
 });
+
+
+
 
 
 /**
