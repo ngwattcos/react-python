@@ -8,12 +8,21 @@
  * 
  */
 
+const fs = require("fs");
 const filewatcher = require('filewatcher');
  
 const watcher = filewatcher();
 
+// probably canges this to ./../react-python-config.json
+let rawConfig = fs.readFileSync('./react-python-config.json');
+let configData = JSON.parse(rawConfig);
+
 // should be read from json
-const input_dir = "input/";
+const input_dir = configData.inDir;
+const output_dir = configData.outDir;
+
+console.log(`input directory: ${input_dir}`);
+console.log(`output directory: ${output_dir}`);
 
 watcher.add(input_dir);
 

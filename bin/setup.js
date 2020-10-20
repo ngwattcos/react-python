@@ -7,6 +7,7 @@ const figlet = require('figlet');
 const fs = require('fs');
 
 
+// probably canges this to ./../react-python-config.json
 const fileName = './react-python-config.json';
 
 
