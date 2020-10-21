@@ -9,9 +9,7 @@
  */
 
 const fs = require("fs");
-const filewatcher = require('filewatcher');
- 
-const watcher = filewatcher();
+const chokidar = require("chokidar");
 
 // probably canges this to ./../react-python-config.json
 new Promise((resolve, reject) => {
@@ -31,15 +29,8 @@ new Promise((resolve, reject) => {
   console.log(`input directory: ${configData.inDir}`);
   console.log(`output directory: ${configData.outDir}`);
 
-  watcher.add(configData.inDir);
-
-
-
-  watcher.on('change', function(file, stat) {
-    console.log(`File modified: ${file}`);
-    if (!stat) {
-      console.log('deleted');
-    }
+  chokidar.watch(configData.inDir).on('all', function(event, path) {
+    console.log(`${event}: ${path}`);
   });
 }).catch(err => {
   console.log(err);
