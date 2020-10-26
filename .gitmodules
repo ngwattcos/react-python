@@ -1,0 +1,3 @@
+[submodule "pythonxyc"]
+	path = pythonxyc
+	url = git@github.com:ngwattcos/pythonxyc.git
