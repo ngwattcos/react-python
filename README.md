@@ -1,2 +1,2 @@
 # react-python
-A Python-like syntax that compiles down into JSX.
+npm module wrapper for pythonxyc, a Python-to-React transpiler.
