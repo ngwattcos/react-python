@@ -1,2 +1,3 @@
-[submodule "DbConnector"]
-	branch = main
+[submodule "pythonxyc"]
+	path = pythonxyc
+	url = git@github.com:ngwattcos/pythonxyc.git

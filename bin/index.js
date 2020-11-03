@@ -1,76 +1,56 @@
 #!/usr/bin/env node
 
-var { watch } = require("gulp");
-
 /**
- * 
+ * This file will call 'gulp'
  * 
  * Needs to be made configurable with an input directory and output directory.
  * Probably should be done through through user-provided config file (their project package.json?)
  * 
  */
 
+const fs = require("fs");
+const chokidar = require("chokidar");
 
-
-exports.print = function() {
-  console.log("running lol");
-}
-
-exports.print();
-
-let inputDir = "";
-let outputDir = "";
-
-exports.setInputDir = function(dir) {
-  if (verifyInputDir(dir)) {
-    inputDir = dir;
-    console.log("Set input dir to: " + inputDir);
-    return;
+// probably canges this to ./../react-python-config.json
+new Promise((resolve, reject) => {
+  let rawConfig = fs.readFileSync('./react-python-config.json');
+  let configData = JSON.parse(rawConfig);
+  resolve(configData);
+}).then(configData => {
+  // should be read from json
+  if (!verifyInputDir(configData.inDir)) {
+    throw new Error("invalid input dir, run react-python-setup again");
   }
-
-  throw new Error("Input directory not properly set.")
-}
-
-exports.setOutputDir = function(dir) {
-  if (verifyOutputDir(dir)) {
-    outputDir = dir;
-    console.log("Set output dir to: " + outputDir);
-    return;
+  if (!verifyOutputDir(configData.inDir)) {
+    throw new Error("invalid output dir, run react-python-setup again");
   }
+  return configData;
+}).then(configData => {
+  console.log(`input directory: ${configData.inDir}`);
+  console.log(`output directory: ${configData.outDir}`);
 
-  throw new Error("Output directory not properly set.")
-}
+  chokidar.watch(configData.inDir).on('all', function(event, path) {
+    console.log(`${event}: ${path}`);
+  });
+}).catch(err => {
+  console.log(err);
+});
+
+
+
+
 
 /**
- * Verifies that valid Python files exist in this dir.
+ * Verifies that input dir exists
  */
 function verifyInputDir() {
   return true;
 }
 
 /**
- * Verifies that
+ * Verifies that output dir exists
  */
 function verifyOutputDir() {
   return true;
 }
 
-/**
- * Invokes the transpiler
- */
-function compile() {
-  return Promise((resolve, reject) => {
-    console.log("i am so compiling right now");
-  })
-}
-
-/**
- * Watches inputDir for changes.
- * On change, call compile on inputDir and rewrite file specified
- */
-exports.watchAndCompile = function(done) {
-  watch(["" + inputDir + "/*.py"], function() {
-    compile()
-    .then(done);
-  })
-}
