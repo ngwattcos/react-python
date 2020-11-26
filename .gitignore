@@ -1,3 +1,20 @@
+Ast
+
+Grammar
+grammar.mli
+grammar.ml
+
+Lexer
+lexer.ml
+
+Transform
+
+*.cmi
+*.cmx
+*.o
+*.mlu
+
+
 # Masc stuff
 .DS_Store
 
