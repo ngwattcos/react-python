@@ -24,7 +24,7 @@ This is an example of the AST generated from the above file:
   (Update (Var "t", Equals, Bexp (Aexp (Plus (VarAccess (Var "t"), Int 1)))));
  ValUpdate (JLet ("t", Bexp (Aexp (VarAccess (Var "t")))))]
 ```
-We are currently working on translation and transformation. There are Python specific functions/syntax that need to be transformed like “len()” and “str()”. The above can be translated into: 
+We are currently working on translation and transformation. There are Python specific functions/syntax that need to be transformed like `len()` and `str()`. The above can be translated into: 
 ```
 let t = t;
 let y = "Hello world";
