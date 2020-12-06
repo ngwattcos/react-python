@@ -1,6 +1,5 @@
 **Our project’s goal is to create a transpiler from a Python-like language to React JSX.**\
-Last time, we were working on successfully generating an AST. This time, we have essentially finished the lexer, grammar/parser/AST. 
-This is an example of the AST generated.
+Last time, we were working on successfully generating an AST. This time, we have essentially finished the lexer, grammar/parser/AST.
 ```
 # The first line will is intentionally a newline 
 
@@ -13,7 +12,7 @@ t += 1
 
 t -= x + x
 ```
-
+This is an example of the AST generated from the above file:
 ```
 [ValUpdate
   (Update (Var "t", MinusEquals,
@@ -25,7 +24,7 @@ t -= x + x
   (Update (Var "t", Equals, Bexp (Aexp (Plus (VarAccess (Var "t"), Int 1)))));
  ValUpdate (JLet ("t", Bexp (Aexp (VarAccess (Var "t")))))]
 ```
-We are currently working on translation and transformation. There are Python specific functions/syntax that need to be transformed like “len()” and “str()”. The above example now generates: 
+We are currently working on translation and transformation. There are Python specific functions/syntax that need to be transformed like “len()” and “str()”. The above can be translated into: 
 ```
 let t = t;
 let y = "Hello world";
