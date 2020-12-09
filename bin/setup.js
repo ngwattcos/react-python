@@ -6,9 +6,11 @@ const figlet = require('figlet');
 // const inquirer = require('inquirer');
 const fs = require('fs');
 
+const exists = require('./exists');
 
-// probably canges this to ./../react-python-config.json
-const fileName = './react-python-config.json';
+
+// probably change this to ./../react-python-config.json?
+const fileName = '../react-python-config.json';
 
 
 const prompts = require('../lib/prompts');
@@ -31,7 +33,13 @@ runSetup()
   const { OCamlInstalled, ...config } = promptResult;
 
   if (!OCamlInstalled) {
-    throw 'Please install OCaml in the meantime.'
+    throw 'Please install OCaml in the meantime.';
+  }
+  if (!exists.directoryExists(`../${config.inDir}`)) {
+    throw 'Input directory does not exist.';
+  }
+  if (!exists.directoryExists(`../${config.outDir}`)) {
+    throw 'Output directory does not exist.';
   }
 
   return config;
@@ -50,4 +58,5 @@ runSetup()
 })
 .catch(err => {
   console.log(err);
+  process.exit();
 });

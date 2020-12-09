@@ -13,7 +13,7 @@ const chokidar = require("chokidar");
 
 // probably canges this to ./../react-python-config.json
 new Promise((resolve, reject) => {
-  let rawConfig = fs.readFileSync('./react-python-config.json');
+  let rawConfig = fs.readFileSync('../react-python-config.json');
   let configData = JSON.parse(rawConfig);
   resolve(configData);
 }).then(configData => {
@@ -29,8 +29,13 @@ new Promise((resolve, reject) => {
   console.log(`input directory: ${configData.inDir}`);
   console.log(`output directory: ${configData.outDir}`);
 
-  chokidar.watch(configData.inDir).on('all', function(event, path) {
-    console.log(`${event}: ${path}`);
+  chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
+    const pattern = `../${configData.inDir}/`;
+    const root = `../${configData.inDir}`;
+    
+    if (path !== pattern && path !== root) {
+      console.log(`${event}: (${configData.inDir}) ${path.replace(pattern, "")}`);
+    }
   });
 }).catch(err => {
   console.log(err);
