@@ -22,10 +22,10 @@ new Promise((resolve, reject) => {
   resolve(configData);
 }).then(configData => {
   // should be read from json
-  if (!exists.directoryExists(configData.inDir)) {
+  if (!exists.directoryExists(`../${configData.inDir}`)) {
     throw new Error("invalid input dir, run react-python-setup again");
   }
-  if (!exists.directoryExists(configData.inDir)) {
+  if (!exists.directoryExists(`../${configData.inDir}`)) {
     throw new Error("invalid output dir, run react-python-setup again");
   }
   return configData;
