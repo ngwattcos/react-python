@@ -33,10 +33,15 @@ new Promise((resolve, reject) => {
   console.log(`input directory: ${configData.inDir}`);
   console.log(`output directory: ${configData.outDir}`);
 
+  const inDir = configData.inDir + optionalSlash(configData.inDir);
+  const outDir = configData.outDir + optionalSlash(configData.outDir);
+
+  if (inDir === outDir) {
+    throw new Error("Inout and output directories are the same")
+  }
+
   chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
 
-    const inDir = configData.inDir + optionalSlash(configData.inDir);
-    const outDir = configData.outDir + optionalSlash(configData.outDir);
 
     const inPattern = `../${inDir}`;
     const root = `../${configData.inDir}`;
