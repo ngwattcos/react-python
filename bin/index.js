@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
 /**
- * This file will call 'gulp'
- * 
- * Needs to be made configurable with an input directory and output directory.
- * Probably should be done through through user-provided config file (their project package.json?)
+ * This file will call an instance of 'chokidar'
+ * to watch an input directory for changes
  * 
  */
 
 const fs = require("fs");
 const chokidar = require("chokidar");
+const compiler = require("./compiler");
+const exists = require("./exists");
+
+const optionalSlash = (dir) => {
+  return dir.substring(dir.length - 1, dir.length) !== "/" ? "/" : "";
+}
 
 // probably canges this to ./../react-python-config.json
 new Promise((resolve, reject) => {
@@ -18,10 +22,10 @@ new Promise((resolve, reject) => {
   resolve(configData);
 }).then(configData => {
   // should be read from json
-  if (!verifyInputDir(configData.inDir)) {
+  if (!exists.directoryExists(configData.inDir)) {
     throw new Error("invalid input dir, run react-python-setup again");
   }
-  if (!verifyOutputDir(configData.inDir)) {
+  if (!exists.directoryExists(configData.inDir)) {
     throw new Error("invalid output dir, run react-python-setup again");
   }
   return configData;
@@ -30,32 +34,25 @@ new Promise((resolve, reject) => {
   console.log(`output directory: ${configData.outDir}`);
 
   chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
-    const pattern = `../${configData.inDir}/`;
+
+    const inDir = configData.inDir + optionalSlash(configData.inDir);
+    const outDir = configData.outDir + optionalSlash(configData.outDir);
+
+    const inPattern = `../${inDir}`;
     const root = `../${configData.inDir}`;
     
-    if (path !== pattern && path !== root) {
-      console.log(`${event}: (${configData.inDir}) ${path.replace(pattern, "")}`);
+    if (path !== inPattern && path !== root) {
+      const pathInDir = path.replace(inPattern, "");
+
+      console.log(`${event}: (${inDir}) ${pathInDir}`);
+
+      if (event === "add") { 
+        compiler.transpile(inDir, outDir, pathInDir);
+      } else if (event === "addDir") {
+        compiler.addDirectory(outDir, pathInDir);
+      }
     }
   });
 }).catch(err => {
   console.log(err);
 });
-
-
-
-
-
-/**
- * Verifies that input dir exists
- */
-function verifyInputDir() {
-  return true;
-}
-
-/**
- * Verifies that output dir exists
- */
-function verifyOutputDir() {
-  return true;
-}
-
