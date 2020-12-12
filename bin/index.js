@@ -11,6 +11,11 @@ const chokidar = require("chokidar");
 const compiler = require("./compiler");
 const exists = require("./exists");
 
+compiler.setup({
+  os: process.platform,
+  version: "0.1"
+})
+
 const optionalSlash = (dir) => {
   return dir.substring(dir.length - 1, dir.length) !== "/" ? "/" : "";
 }
@@ -40,8 +45,6 @@ new Promise((resolve, reject) => {
     // avoid cycles
     throw new Error("Input and output directories are the same")
   }
-
-  console.log(process.platform);
 
   if (compiler.supportedOs(process.platform)) {
     chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {

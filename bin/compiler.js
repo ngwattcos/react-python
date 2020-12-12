@@ -10,9 +10,9 @@ const versionOfOs = {
     "darwin": "pyxyc-darwin.byte",
 }
 
-const _compiler = "";
+let _compiler = "";
 
-const _version = "";
+let _version = "";
 
 const setup = ({os, version}) => {
     _compiler = versionOfOs[os];
@@ -24,7 +24,7 @@ const supportedOs = (os) => {
 }
 
 const transpile = (inDir, outDir, path) => {
-    if (shell.exec(`./main.byte ${path} ${inDir} ${outDir}`).code !== 0) {
+    if (shell.exec(`./${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
         shell.echo(`Error in compiling ${path}`);
         shell.exit(1);
     }
