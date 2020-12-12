@@ -5,6 +5,24 @@
 const shell = require('shelljs');
 // const exists = require('./exists');
 
+const versionOfOs = {
+    "linux": "pyxyc-linux.byte",
+    "darwin": "pyxyc-darwin.byte",
+}
+
+const _compiler = "";
+
+const _version = "";
+
+const setup = ({os, version}) => {
+    _compiler = versionOfOs[os];
+    _version = version;
+}
+
+const supportedOs = (os) => {
+    return os in versionOfOs;
+}
+
 const transpile = (inDir, outDir, path) => {
     if (shell.exec(`./main.byte ${path} ${inDir} ${outDir}`).code !== 0) {
         shell.echo(`Error in compiling ${path}`);
@@ -19,4 +37,4 @@ const addDirectory = (outDir, path) => {
     }
 }
 
-module.exports = { transpile, addDirectory };
+module.exports = { transpile, addDirectory, setup, supportedOs };

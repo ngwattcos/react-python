@@ -37,27 +37,36 @@ new Promise((resolve, reject) => {
   const outDir = configData.outDir + optionalSlash(configData.outDir);
 
   if (inDir === outDir) {
-    throw new Error("Inout and output directories are the same")
+    // avoid cycles
+    throw new Error("Input and output directories are the same")
   }
 
-  chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
+  console.log(process.platform);
+
+  if (compiler.supportedOs(process.platform)) {
+    chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
 
 
-    const inPattern = `../${inDir}`;
-    const root = `../${configData.inDir}`;
-    
-    if (path !== inPattern && path !== root) {
-      const pathInDir = path.replace(inPattern, "");
-
-      console.log(`${event}: (${inDir}) ${pathInDir}`);
-
-      if (event === "add") { 
-        compiler.transpile(inDir, outDir, pathInDir);
-      } else if (event === "addDir") {
-        compiler.addDirectory(outDir, pathInDir);
+      const inPattern = `../${inDir}`;
+      const root = `../${configData.inDir}`;
+      
+      if (path !== inPattern && path !== root) {
+        const pathInDir = path.replace(inPattern, "");
+  
+        console.log(`${event}: (${inDir}) ${pathInDir}`);
+  
+        if (event === "add") { 
+          compiler.transpile(inDir, outDir, pathInDir);
+        } else if (event === "addDir") {
+          compiler.addDirectory(outDir, pathInDir);
+        }
       }
-    }
-  });
+    });
+  } else {
+    throw new Error("Unsupported OS: " + process.platform0);
+  }
+
+  
 }).catch(err => {
   console.log(err);
 });
