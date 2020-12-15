@@ -13,7 +13,7 @@ const exists = require('./exists');
 const fileName = '../../react-python-config.json';
 
 
-const prompts = require('../../lib/prompts');
+const prompts = require('../lib/prompts');
 
 const runSetup = async () => {
   console.log(
