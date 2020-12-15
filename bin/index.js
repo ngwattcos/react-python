@@ -20,6 +20,33 @@ const optionalSlash = (dir) => {
   return dir.substring(dir.length - 1, dir.length) !== "/" ? "/" : "";
 }
 
+const withoutSlash = (dir) => {
+  if (dir.substring(dir.length - 1, dir.length) === "/") {
+    return dir.substring(0, dir.length - 1)
+  } else {
+    return dir;
+  }
+}
+
+
+const traverseAllFiles = (dir, cbFile, cbDir, root) => {
+
+  fs.readdir(dir, (err, files) => {
+    files.forEach(path => {
+      const fullPath = `${dir}/${path}`;
+      const pathInDir = fullPath.replace(root, "");
+
+      if (fs.statSync(`${dir}/${path}`).isDirectory()) {
+        cbDir(pathInDir);
+        traverseAllFiles(`${dir}/${path}`, cbFile, cbDir, root);
+      } else {
+        cbFile(pathInDir);
+      }
+      
+    });
+  });
+}
+
 new Promise((resolve, reject) => {
   let rawConfig = fs.readFileSync('../../react-python-config.json');
   let configData = JSON.parse(rawConfig);
@@ -34,36 +61,36 @@ new Promise((resolve, reject) => {
   }
   return configData;
 }).then(configData => {
-  console.log(`input directory: ${configData.inDir}`);
-  console.log(`output directory: ${configData.outDir}`);
 
-  const inDir = configData.inDir + optionalSlash(configData.inDir);
-  const outDir = configData.outDir + optionalSlash(configData.outDir);
+  const inDir = withoutSlash(configData.inDir);
+  const outDir = withoutSlash(configData.outDir);
+  const inDirSlash = configData.inDir + optionalSlash(configData.inDir);
+  const outDirSlash = configData.outDir + optionalSlash(configData.outDir);
+  const root = `../../${inDir}/`;
+
+  
+  console.log(`input directory: ${inDir}`);
+  console.log(`output directory: ${outDir}`);
 
   if (inDir === outDir) {
     // avoid cycles
     throw new Error("Input and output directories are the same")
   }
 
+
+
   if (compiler.supportedOs(process.platform)) {
-    chokidar.watch(`../../${configData.inDir}`).on('all', function(event, path) {
+    traverseAllFiles(`../../${inDir}`,
+      (fName) => {
+        console.log(fName);
+        compiler.transpile(inDirSlash, outDirSlash, fName);
+      },
+      (dirName) => {
+        compiler.addDirectory(outDirSlash, dirName);
+      },
+      root
+    );
 
-
-      const inPattern = `../../${inDir}`;
-      const root = `../../${configData.inDir}`;
-      
-      if (path !== inPattern && path !== root) {
-        const pathInDir = path.replace(inPattern, "");
-  
-        console.log(`${event}: (${inDir}) ${pathInDir}`);
-  
-        if (event === "add") { 
-          compiler.transpile(inDir, outDir, pathInDir);
-        } else if (event === "addDir") {
-          compiler.addDirectory(outDir, pathInDir);
-        }
-      }
-    });
   } else {
     throw new Error("Unsupported OS: " + process.platform0);
   }
