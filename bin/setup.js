@@ -10,10 +10,10 @@ const exists = require('./exists');
 
 
 // probably change this to ./../react-python-config.json?
-const fileName = '../react-python-config.json';
+const fileName = '../../react-python-config.json';
 
 
-const prompts = require('../lib/prompts');
+const prompts = require('../../lib/prompts');
 
 const runSetup = async () => {
   console.log(
@@ -35,10 +35,10 @@ runSetup()
   if (!OCamlInstalled) {
     throw 'Please install OCaml in the meantime.';
   }
-  if (!exists.directoryExists(`../${config.inDir}`)) {
+  if (!exists.directoryExists(`../../${config.inDir}`)) {
     throw 'Input directory does not exist.';
   }
-  if (!exists.directoryExists(`../${config.outDir}`)) {
+  if (!exists.directoryExists(`../../${config.outDir}`)) {
     throw 'Output directory does not exist.';
   }
 

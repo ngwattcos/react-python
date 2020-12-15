@@ -20,17 +20,16 @@ const optionalSlash = (dir) => {
   return dir.substring(dir.length - 1, dir.length) !== "/" ? "/" : "";
 }
 
-// probably canges this to ./../react-python-config.json
 new Promise((resolve, reject) => {
-  let rawConfig = fs.readFileSync('../react-python-config.json');
+  let rawConfig = fs.readFileSync('../../react-python-config.json');
   let configData = JSON.parse(rawConfig);
   resolve(configData);
 }).then(configData => {
   // should be read from json
-  if (!exists.directoryExists(`../${configData.inDir}`)) {
+  if (!exists.directoryExists(`../../${configData.inDir}`)) {
     throw new Error("invalid input dir, run react-python-setup again");
   }
-  if (!exists.directoryExists(`../${configData.inDir}`)) {
+  if (!exists.directoryExists(`../../${configData.inDir}`)) {
     throw new Error("invalid output dir, run react-python-setup again");
   }
   return configData;
@@ -47,11 +46,11 @@ new Promise((resolve, reject) => {
   }
 
   if (compiler.supportedOs(process.platform)) {
-    chokidar.watch(`../${configData.inDir}`).on('all', function(event, path) {
+    chokidar.watch(`../../${configData.inDir}`).on('all', function(event, path) {
 
 
-      const inPattern = `../${inDir}`;
-      const root = `../${configData.inDir}`;
+      const inPattern = `../../${inDir}`;
+      const root = `../../${configData.inDir}`;
       
       if (path !== inPattern && path !== root) {
         const pathInDir = path.replace(inPattern, "");
