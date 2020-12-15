@@ -40,7 +40,9 @@ const traverseAllFiles = (dir, cbFile, cbDir, root) => {
         cbDir(pathInDir);
         traverseAllFiles(`${dir}/${path}`, cbFile, cbDir, root);
       } else {
-        cbFile(pathInDir);
+        if (pathInDir.substring(pathInDir.length - 4, pathInDir.length) === ".pyx") {
+          cbFile(pathInDir);
+        }
       }
       
     });
