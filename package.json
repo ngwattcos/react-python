@@ -4,9 +4,7 @@
   "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
   "main": "bin/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pyxyc-setup": "npm run react-python-setup",
-    "pyxc": "npm run react-python-compile"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -39,6 +37,8 @@
     "shelljs": "^0.8.4"
   },
   "bin": {
+    "pyxyc-setup": "bin/setup.js",
+    "pyxc": "bin/index.js",
     "react-python-setup": "bin/setup.js",
     "react-python-compile": "bin/index.js",
     "react-python-watch-and-compile": "bin/watch-and-compile.js"
