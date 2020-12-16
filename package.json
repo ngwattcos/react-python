@@ -1,19 +1,17 @@
 {
   "name": "react-python",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
-  "main": "./bin/setup.js",
   "bin": {
     "pyxyc-setup": "./bin/setup.js",
-    "pyxc": "./bin/index.js",
+    "pyxyc": "./bin/index.js",
     "pyxyc-watch-and-compile": "./bin/watch-and-compile.js",
     "react-python-setup": "./bin/setup.js",
     "react-python-compile": "./bin/index.js",
     "react-python-watch-and-compile": "./bin/watch-and-compile.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/setup.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
