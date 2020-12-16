@@ -2,6 +2,7 @@
   "name": "react-python",
   "version": "1.0.1",
   "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
+  "main": "./bin/setup.js",
   "bin": {
     "pyxyc-setup": "./bin/setup.js",
     "pyxc": "./bin/index.js",
@@ -35,7 +36,14 @@
     "url": "https://github.com/ngwattcos/react-python/issues"
   },
   "homepage": "https://github.com/ngwattcos/react-python#readme",
-  "keywords": ["python", "transpiler", "jsx", "react", "js", "javascript"],
+  "keywords": [
+    "python",
+    "transpiler",
+    "jsx",
+    "react",
+    "js",
+    "javascript"
+  ],
   "dependencies": {
     "chokidar": "^3.4.3",
     "clear": "^0.1.0",
