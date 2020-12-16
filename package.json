@@ -34,6 +34,7 @@
     "url": "https://github.com/ngwattcos/react-python/issues"
   },
   "homepage": "https://github.com/ngwattcos/react-python#readme",
+  "keywords": ["python", "transpiler", "jsx", "react", "js", "javascript"],
   "dependencies": {
     "chokidar": "^3.4.3",
     "clear": "^0.1.0",
