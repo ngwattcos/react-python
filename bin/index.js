@@ -49,14 +49,14 @@ const traverseAllFiles = (dir, cbFile, cbDir, root) => {
 
 const main = async () => {
   try {
-    let rawConfig = fs.readFileSync('../../react-python-config.json');
+    let rawConfig = fs.readFileSync('react-python-config.json');
     let configData = JSON.parse(rawConfig);
 
     // should be read from json
-    if (!files.directoryExists(`../../${configData.inDir}`)) {
+    if (!files.directoryExists(`${configData.inDir}`)) {
       throw new Error('invalid input dir, run react-python-setup again');
     }
-    if (!files.directoryExists(`../../${configData.inDir}`)) {
+    if (!files.directoryExists(`${configData.inDir}`)) {
       throw new Error('invalid output dir, run react-python-setup again');
     }
 
@@ -64,7 +64,7 @@ const main = async () => {
     const outDir = withoutSlash(configData.outDir);
     const inDirSlash = configData.inDir + optionalSlash(configData.inDir);
     const outDirSlash = configData.outDir + optionalSlash(configData.outDir);
-    const root = `../../${inDir}/`;
+    const root = `${inDir}/`;
 
     
     console.log(`input directory: ${inDir}`);
@@ -78,7 +78,7 @@ const main = async () => {
     await files.clean(outDirSlash);
 
     if (compiler.supportedOs(process.platform)) {
-      traverseAllFiles(`../../${inDir}`,
+      traverseAllFiles(`${inDir}`,
         (fName) => {
           console.log(fName);
           compiler.transpile(inDirSlash, outDirSlash, fName);

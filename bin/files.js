@@ -9,7 +9,7 @@ const directoryExists = (filePath) => {
 };
 
 const clean = async (outDir, path) => {
-  if (shell.exec(`rm -rf ../../${outDir}`).code !== 0) {
+  if (shell.exec(`rm -rf ${outDir}`).code !== 0) {
       shell.echo(`Error in deleting ${path}`);
       shell.exit(1);
   }

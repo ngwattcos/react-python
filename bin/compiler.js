@@ -31,7 +31,7 @@ const transpile = (inDir, outDir, path) => {
 }
 
 const addDirectory = (outDir, path) => {
-    if (shell.exec(`mkdir -p ../../${outDir}${path}`).code !== 0) {
+    if (shell.exec(`mkdir -p ${outDir}${path}`).code !== 0) {
         shell.echo(`Error in creating directory ${path}`);
         shell.exit(1);
     }
