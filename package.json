@@ -1,19 +1,18 @@
 {
   "name": "react-python",
   "version": "1.0.0",
-  "description": "A Python-like syntax that compiles down into JSX.",
+  "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-container": "node scripts/create-app-container.js",
-    "create": "node create-app-container.js",
-    "start": "node src/index.js"
+    "pyxyc-setup": "npm run react-python-setup",
+    "pyxc": "npm run react-python-compile"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngwattcos/react-python.git"
   },
-  "author": "",
+  "author": "Scott Wang",
   "contributors": [
     {
       "name": "Scott Wang",
@@ -40,9 +39,8 @@
     "shelljs": "^0.8.4"
   },
   "bin": {
-    "react-python-setup": "./bin/setup.js",
-    "react-python-watch-and-compile": "clean && ./bin/index.js",
-    "pyxc": "clean && ./bin/index.js",
-    "clean": "./bin/clean.js"
+    "react-python-setup": "bin/setup.js",
+    "react-python-compile": "bin/index.js",
+    "react-python-watch-and-compile": "bin/watch-and-compile.js"
   }
 }
