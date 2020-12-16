@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#! /usr/bin/env node
 
 // const clear = require('clear');
 // const clui = require('clui');
