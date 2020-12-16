@@ -6,13 +6,13 @@ const shell = require('shelljs');
 // const exists = require('./exists');
 
 const versionOfOs = {
-    "linux": "pyxyc-linux.byte",
-    "darwin": "pyxyc-darwin.byte",
+    'linux': 'pyxyc-linux.byte',
+    'darwin': 'pyxyc-darwin.byte',
 }
 
-let _compiler = "";
+let _compiler = '';
 
-let _version = "";
+let _version = '';
 
 const setup = ({os, version}) => {
     _compiler = versionOfOs[os];
