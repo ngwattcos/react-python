@@ -2,7 +2,6 @@
   "name": "react-python",
   "version": "1.0.0",
   "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
-  "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
