@@ -10,16 +10,28 @@ https://github.com/ngwattcos/pythonxyc
 
 # Usage
 ### Setup
-Run the startup tool, which sets up references to input and output source directories:
+#### Linux
+Run the startup tool, which sets up references to input and output source directories (inux):
 `pyxyc-setup`or `react-python-setup`
 
+#### macOS
+Run the startup tool, which sets up references to input and output source directories (inux):
+`npx pyxyc-setup`or `npx react-python-setup`
+
 ### Transpiling
-Compile all files in the input source directory:
+#### Linux
+Compile all files in the input source directory (Linux):\s\s
 `pyxyc`or `react-python-compile`
 
-Alternatively, open a running instance of a file watcher on the input directory:
+Alternatively, open a running instance of a file watcher on the input directory (Linux):\s\s
 `pyxyc-watch-and-compile` or `react-python-watch-and-compile`
 
+#### macOS
+Compile all files in the input source directory (Linux):\s\s
+`npx pyxyc`or `npx react-python-compile`
+
+Alternatively, open a running instance of a file watcher on the input directory (Linux):\s\s
+`npx pyxyc-watch-and-compile` or `npx react-python-watch-and-compile`
 
 ### Usage ideas!
 1. Integrate `react-python`'s command-line calls`pyxyc-setup` and `pyxyc` into your app's workflow by referencing them in your package's `scripts`.
