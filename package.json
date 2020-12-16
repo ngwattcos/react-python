@@ -11,7 +11,8 @@
     "react-python-watch-and-compile": "./bin/watch-and-compile.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bin/setup.js"
   },
   "repository": {
     "type": "git",
