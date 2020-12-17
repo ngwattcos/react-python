@@ -10,14 +10,14 @@ https://github.com/ngwattcos/pythonxyc
 
 # Usage
 ### Setup
-Run the startup tool, which sets up references to input and output source directories:
+Run the startup tool, which sets up references to input and output source directories:\s\s
 `npx pyxyc-setup`or `npx react-python-setup`
 
 ### Transpiling
-Compile all files in the input source directory:
+Compile all files in the input source directory:\s\s
 `npx pyxyc`or `npx react-python-compile`
 
-Alternatively, open a running instance of a file watcher on the input directory:
+Alternatively, open a running instance of a file watcher on the input directory:\s\s
 `npx pyxyc-watch-and-compile` or `npx react-python-watch-and-compile`
 
 
