@@ -2,7 +2,7 @@
 An npm wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX.
 
 ### Compiler
-pythonxyc (compiler) source code can be found at:
+pythonxyc (compiler) source code and documentation can be found at:
 https://github.com/ngwattcos/pythonxyc
 
 # Installation
@@ -18,6 +18,7 @@ Compile all files in the input source directory:
 `npx pyxyc` or `npx react-python-compile`
 
 Alternatively, open a running instance of a file watcher on the input directory:
+
 `npx pyxyc-watch-and-compile` or `npx react-python-watch-and-compile`
 
 
