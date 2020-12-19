@@ -30,6 +30,13 @@ const transpile = (inDir, outDir, path) => {
     }
 }
 
+
+const transpilePersistent = (inDir, outDir, path) => {
+    if (shell.exec(`./node_modules/react-python/${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
+        shell.echo(`Error in compiling ${path}`);
+    }
+}
+
 const addDirectory = (outDir, path) => {
     if (shell.exec(`mkdir -p ${outDir}${path}`).code !== 0) {
         shell.echo(`Error in creating directory ${path}`);
@@ -37,4 +44,4 @@ const addDirectory = (outDir, path) => {
     }
 }
 
-module.exports = { transpile, addDirectory, setup, supportedOs };
+module.exports = { transpile, transpilePersistent, addDirectory, setup, supportedOs };

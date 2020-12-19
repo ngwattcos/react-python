@@ -58,7 +58,7 @@ new Promise((resolve, reject) => {
         console.log(`${event}: (${inDir}) ${pathInDir}`);
   
         if (event === "add" || event === "change") { 
-          compiler.transpile(inDir, outDir, pathInDir);
+          compiler.transpilePersistent(inDir, outDir, pathInDir);
         } else if (event === "addDir") {
           compiler.addDirectory(outDir, pathInDir);
         } else if (event === "unlink") {
