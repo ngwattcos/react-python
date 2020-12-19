@@ -420,6 +420,7 @@ Similar to an HTML element, the following makes up a JSX expression:
 * "<" followed by a series of `react attributes` of arbitrary length (separated by spaces) followed by ">"
 
 **Returning JSX**
+
 Here is an example of JSX being returned by a function (written in the style of React functional components):
 
     # component with attributes with children that also attributes
@@ -469,6 +470,7 @@ Transformation is necessary to convert certain commands and expressions into a J
 Most commands are transformed simply at the top-level that they are detected. This is because few commands recursively need this level of transformation. The exception is `for` loops, which can can occur anywhere in any body of a program (`while` loops don't need to be transformed).
 
 **for loops**
+
 The following types for for loops are supported:
 * `for i in range(end):`
 * `for i in range(start, end):`
@@ -491,6 +493,7 @@ These are translated as follows, respectively:
 Expression are recursively transformed at every level of translation. This is because expressions can be recursive.
 
 **Q: How do I use functional features like map, filter, and reduce?**
+
 It's a bit of a mess in Python, which offers them in several different formats:
 * `map([lambda], [exp: list]`
 *  `filter([lambda], [exp: list])`
