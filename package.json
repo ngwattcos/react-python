@@ -1,6 +1,6 @@
 {
   "name": "react-python",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX",
   "bin": {
     "pyxyc-setup": "./bin/setup.js",
