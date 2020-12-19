@@ -1,6 +1,8 @@
 # react-python
 An npm wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX.
 
+
+## Table of Contents
 - [react-python](#react-python)
     + [Compiler](#compiler)
 - [Installation](#installation)
@@ -58,7 +60,7 @@ Alternatively, open a running instance of a file watcher on the input directory:
 
 # pyxthonxyc Documentation
 
-Here is some documentation coped from https://github.com/ngwattcos/pythonxyc/blob/main/README.md:
+Here is some documentation copied from https://github.com/ngwattcos/pythonxyc/blob/main/README.md:
 
 ## PythonXY and Parsing Overview
 PythonXY is very similar to Python. It is composed of sequences of commands padded with an arbitrary number of newlines in between. Sequences of commands are recursively defined as follows:
