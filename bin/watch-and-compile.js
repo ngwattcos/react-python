@@ -9,7 +9,7 @@
 const fs = require("fs");
 const chokidar = require("chokidar");
 const compiler = require("./compiler");
-const exists = require("./exists");
+const files = require("./files");
 
 compiler.setup({
   os: process.platform,
@@ -26,10 +26,10 @@ new Promise((resolve, reject) => {
   resolve(configData);
 }).then(configData => {
   // should be read from json
-  if (!exists.directoryExists(`${configData.inDir}`)) {
+  if (!files.directoryExists(`${configData.inDir}`)) {
     throw new Error("invalid input dir, run react-python-setup again");
   }
-  if (!exists.directoryExists(`${configData.inDir}`)) {
+  if (!files.directoryExists(`${configData.inDir}`)) {
     throw new Error("invalid output dir, run react-python-setup again");
   }
   return configData;

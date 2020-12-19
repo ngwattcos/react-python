@@ -13,6 +13,7 @@ const clean = async (outDir, path) => {
       shell.echo(`Error in deleting ${path}`);
       shell.exit(1);
   }
+  shell.exec(`mkdir ${outDir}`);
 }
 
 module.exports = { directoryExists, clean };

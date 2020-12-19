@@ -3,7 +3,7 @@
  */
 
 const shell = require('shelljs');
-// const exists = require('./exists');
+const files = require('./files');
 
 const versionOfOs = {
     'linux': 'pyxyc-linux.byte',
@@ -24,7 +24,7 @@ const supportedOs = (os) => {
 }
 
 const transpile = (inDir, outDir, path) => {
-    if (shell.exec(`./${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
+    if (shell.exec(`./node_modules/react-python/${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
         shell.echo(`Error in compiling ${path}`);
         shell.exit(1);
     }
