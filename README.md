@@ -38,15 +38,18 @@ pythonxyc (compiler) source code and documentation can be found at:
 https://github.com/ngwattcos/pythonxyc
 
 # Installation
+
 `npm install --save-dev react-python`
 
 # Usage
 ### Setup
 Run the startup tool, which sets up references to input and output source directories:
+
 `npx pyxyc-setup` or `npx react-python-setup`
 
 ### Transpiling
 Compile all files in the input source directory:
+
 `npx pyxyc` or `npx react-python-compile`
 
 Alternatively, open a running instance of a file watcher on the input directory:
