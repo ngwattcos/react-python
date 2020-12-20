@@ -1,7 +1,7 @@
 # react-python
 An npm wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX.
 
-**Aologies! Exports are not working. Please check back in a day or two when I tweak the compiler!
+**Apologies! Exports are not working. Please check back in a day or two when I tweak the compiler!
 
 
 ## Table of Contents
