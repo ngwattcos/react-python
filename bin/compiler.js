@@ -24,7 +24,7 @@ const supportedOs = (os) => {
 }
 
 const transpile = (inDir, outDir, path) => {
-    if (shell.exec(`./node_modules/react-python/${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
+    if (shell.exec(`${__dirname}/../${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
         shell.echo(`Error in compiling ${path}`);
         shell.exit(1);
     }
@@ -32,7 +32,7 @@ const transpile = (inDir, outDir, path) => {
 
 
 const transpilePersistent = (inDir, outDir, path) => {
-    if (shell.exec(`./node_modules/react-python/${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
+    if (shell.exec(`${__dirname}/../${_compiler} ${path} ${inDir} ${outDir}`).code !== 0) {
         shell.echo(`Error in compiling ${path}`);
     }
 }
