@@ -1,18 +1,17 @@
-# react-python
-An npm wrapper for pythonxyc, a compiler that translates Python(-like) code into React JSX.
 
-**Apologies!** Exports are not working. Please check back in a day or two when I tweak the compiler!
+# pythonxyc
+a simple transpiler for PythonXY, a Python-like syntax that compiles down into JSX.
 
+PythonXY is Python extended with JSX to allow building React apps.
 
-## Table of Contents
-- [react-python](#react-python)
-    + [Compiler](#compiler)
-- [Installation](#installation)
-- [Usage](#usage)
-    + [Setup](#setup)
-    + [Transpiling](#transpiling)
-    + [Usage ideas!](#usage-ideas-)
-- [pyxthonxyc Documentation](#pyxthonxyc-documentation)
+While a Python-to-JavaScript compiler is always fun and all, pythonxyc is best enjoyed fresh when used in the npm module `react-python`, which can be found at https://www.npmjs.com/package/react-python.
+
+# Table of Contents
+- [Build and Usage](#build-and-usage)
+    + [Paths](#paths)
+- [How It Works](#how-it-works)
+  * [Overview](#overview)
+  * [Lexing Overview](#lexing-overview)
   * [PythonXY and Parsing Overview](#pythonxy-and-parsing-overview)
     + [Indentation and Program Structure](#indentation-and-program-structure)
     + [Variable Declarations](#variable-declarations)
@@ -35,37 +34,40 @@ An npm wrapper for pythonxyc, a compiler that translates Python(-like) code into
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
-### Compiler
-pythonxyc (compiler) source code and documentation can be found at:
-https://github.com/ngwattcos/pythonxyc
 
-# Installation
+# Build and Usage
+Development and building requires OCaml version 4.09.0 installed according to https://www.cs.cornell.edu/courses/cs3110/2020sp/install.html.
 
-`npm install --save-dev react-python`
+Build an executable binary native to your OS:
+`make run`
 
-# Usage
-### Setup
-Run the startup tool, which sets up references to input and output source directories:
+Run the build executable binary:
+`./main.byte <inputFile> <outputFile>`
 
-`npx pyxyc-setup` or `npx react-python-setup`
+### Paths
+Paths are relative to the current working directory of the executable. Testing shortcuts have been removed, so it is necessary to explicitly use paths relative to the executable, for example:
+`tests/parser/parse00.pyx`
 
-### Transpiling
-Compile all files in the input source directory:
+# How It Works
+## Overview
 
-`npx pyxyc` or `npx react-python-compile`
+The lexer is defined in `lexer.mll`, which scans for patterns in the source code and matches them with the tokens defined in `grammar.mly`.
 
-Alternatively, open a running instance of a file watcher on the input directory:
+The syntax of the language and how it is parsed is defined in `grammar.mly`, which generates a `grammar.mli` interface file and `grammar.ml` parser, which in turn will generate corresponding object files. The parser associates combinations of tokens and rules (combinations of patterns) with data types specified in `ast.ml` as specified in the production rules in `grammar.mly`.
 
-`npx pyxyc-watch-and-compile` or `npx react-python-watch-and-compile`
+`transform.ml` takes in parsed expressions or commands (in for form of one of the many variant types as defined in `ast.ml`), carries out some transformations on them, and then writes their output to a buffer.
 
+The `main.ml` file is the main driver of the transpiler and combines all of these together. It scans input with the lexer and passes tokens to the parser, which passes AST constructs to the transformer, which returns a buffer that `main.ml` can write to a file specified in the command-line arguments.
 
-### Usage ideas!
-1. Integrate command-line calls `npx pyxyc-setup` and `npx pyxyc` into your app's workflow by referencing them in your package's `scripts`.
-2. While your app is running (and gets dynamically hot-reloaded; i.e., running through `yarn start`or `npm start`), you can run `npx pyxyc-watch-and-compile`or `npx react-python-watch-and-compile`, where changes to the JavaScript source directories will trigger a reload.
+## Lexing Overview
+To expand upon what was said above, the lexer associates specific regular expressions with tokens defined in `grammar.mly`. The lexer takes a longest-match approach in the sense that if two regular expressions (starting from the same position in the lexing buffer) match, the longer expression is accepted. The lexer accepts most, if not all, of the various types of language constructs in Python, including symbol tokens, operators, Python primitives and keywords. In addition, For a detailed list of all symbols, please visit the rules in `lexer.mll`.
 
-# pyxthonxyc Documentation
+Comments are simply consumed and do not present any tokens to the parser.
 
-Here is some documentation copied from https://github.com/ngwattcos/pythonxyc/blob/main/README.md:
+Strings proved difficult to handle if they contained escape sequences. Therefore, our stopgap solution was to simply enumerate a few dozen characters that a string could contain (all alphanumeric characters and simple symbols, with the exception of the backslash). Therefore, strings are theoretically much more limited in our language than in the real Python language, but this would not matter in most real-life use cases. Currently, the only way to delineate strings is with double quotes.
+
+Finally, we borrowed a couple functions of line-counting code and lexing error handling from the provided source code provided in assignment A3 in Cornell CS 4110, which contained a lexer, parser, and ast for the Imp language.
+
 
 ## PythonXY and Parsing Overview
 PythonXY is very similar to Python. It is composed of sequences of commands padded with an arbitrary number of newlines in between. Sequences of commands are recursively defined as follows:
@@ -219,19 +221,46 @@ NOTE: Due to the nature of our parser (which discriminates commands with newline
 
 To take advantage of npm's immense catalogue of third-party modules, (and since the target language is JavaScript/JSX), we opted to use import syntax that is similar to JavaScript's:
 
-import `var list` from `string` 
+
+**default imports**
+
+import as `var` from `string` 
+
+
+    # default imports
+    import as React from "react"
+    
+	# importing from a relative path
+	import as MainView from "./components/MainView"
+
+
+**named imports**
+
+import as `var list` from `string` 
 
     # importing from an npm module
-    import React from "react"
 	import useState, useEffect from "react"
 	
 	# importing from a relative path
-	import MainView from "./components/MainView"
 	import useUser, useProvider from "./hooks"
+
+The reasoning for such import syntax is to reach a compromise between the syntax of Python and JavaScript while capturing the semantic meaning (unfortunately, this syntax is identical to neither language imports): in JavaScript default imports, the imported module is automatically aliased to the `var` in the import statement! Hence `import as var` to explicitly capture the semantics of the default import statement.
 
 **exports**
 
-For similar reasons, we support exports in a manner inspired by JavaScript. However, exports arise naturally from `variable updates` and `dicts` in PythonXY.
+For similar reasons, we support exports in a manner inspired by both JavaScript and Python.
+
+**default exports (ES6)**
+
+export default `exp`
+
+**named exports (ES6)**
+
+export `var1`, `var2`, ...
+
+**exports (CommonJS)**
+
+Exports in the style of CommonJS can arise naturally from `variable updates` and `dicts` in PythonXY.
 
 This is an example of a valid export statement:
 
@@ -421,6 +450,16 @@ Similar to an HTML element, the following makes up a JSX expression:
 
 * "<" followed by a series of `react attributes` of arbitrary length (separated by spaces) followed by ">"
 
+**attributes**
+
+Just like in JSX, a valid attribute can be in one of two forms:
+
+attrib=`string`
+
+attrib={`exp`}
+
+where `exp` is any valid PythonXY expression
+
 **Returning JSX**
 
 Here is an example of JSX being returned by a function (written in the style of React functional components):
@@ -501,7 +540,7 @@ It's a bit of a mess in Python, which offers them in several different formats:
 *  `filter([lambda], [exp: list])`
 * `functools.reduce([lambda], [exp: list]`
 
-However, in JavaScript, each of these functions can be obtained simply by call `.map()`, `.filter()`, and `.reduce()`.  As such, we are currently electing to have the programmer call these methods on a list, unPythonic it may be:
+However, in JavaScript, each of these functions can be obtained simply by calling `.map()`, `.filter()`, and `.reduce()`.  As such, we are currently electing to have the programmer call these methods on a list, unPythonic it may be:
 
     # map
     arr.map(lambda x -> ....)
