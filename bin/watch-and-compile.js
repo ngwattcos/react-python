@@ -3,6 +3,7 @@
 /**
  * This file will call an instance of 'chokidar'
  * to watch an input directory for changes
+ * and then compile files on change
  *
  */
 
