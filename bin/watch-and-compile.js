@@ -17,7 +17,10 @@ compiler.setup({
   version: "0.1",
 });
 
-const optionalSlash = (dir) => {
+/**
+ * Appends a slash to a directory path if the path does not already end with a slash
+ */
+const withDirSlash = (dir) => {
   return dir.substring(dir.length - 1, dir.length) !== "/" ? "/" : "";
 };
 
@@ -40,8 +43,8 @@ new Promise((resolve, reject) => {
     console.log(`input directory: ${configData.inDir}`);
     console.log(`output directory: ${configData.outDir}`);
 
-    const inDir = configData.inDir + optionalSlash(configData.inDir);
-    const outDir = configData.outDir + optionalSlash(configData.outDir);
+    const inDir = configData.inDir + withDirSlash(configData.inDir);
+    const outDir = configData.outDir + withDirSlash(configData.outDir);
 
     if (inDir === outDir) {
       // avoid cycles
@@ -70,7 +73,7 @@ new Promise((resolve, reject) => {
         }
       });
     } else {
-      throw new Error("Unsupported OS: " + process.platform0);
+      throw new Error("Unsupported OS: " + process.platform);
     }
   })
   .catch((err) => {
