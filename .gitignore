@@ -1,7 +1,8 @@
-
-
-# Masc stuff
+# Mac stuff
 .DS_Store
+
+# Test builds
+*.tgz
 
 # Logs
 logs
