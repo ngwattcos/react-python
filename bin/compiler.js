@@ -23,6 +23,9 @@ const supportedOs = (os) => {
   return os in versionOfOs;
 };
 
+/**
+ * Transpiles a file in the inDir directory in a given path, and with a given output directory
+ */
 const transpile = (inDir, outDir, path) => {
   if (
     shell.exec(`${__dirname}/../${_compiler} ${path} ${inDir} ${outDir}`)
